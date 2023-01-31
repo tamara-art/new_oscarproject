@@ -5,6 +5,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 
 public class RegistrationSteps {
     protected static ApplicationManager app;
@@ -19,24 +20,27 @@ public class RegistrationSteps {
     }
 
     @When("Registration credentials \\({string} and {string}) for registration are entered")
-    public void registrationCredentialsAndForRegistrationAreEntered(String email, String password) {
+    public void registrationCredentialsAndForRegistrationAreEntered(String email, String pwd) {
         app.getRegistrationHelper().enterEmail(email);
-        app.getRegistrationHelper().enterPassword(password);
+        app.getRegistrationHelper().enterPassword(pwd);
     }
-
 
     @And("Register button is clicked")
     public void registerButtonIsClicked() {
-        app.getRegistrationHelper();
+        app.getRegistrationHelper().clickRegisterBtn();
     }
 
-    @Then("User is registered")
-    public void userIsRegistered() {
-        app.getRegistrationHelper();
+
+    @Then("Item list container is present")
+    public void itemListContainerIsPresent() {
+        Assert.assertTrue("Item list container is present on the page", app.getItemListContainerHelper()
+                .isContainerPresent());
+
     }
 
-    @And("User is logged in")
-    public void userIsLoggedIn() {
-        app.getRegistrationHelper();
+    @And("Username is visible")
+    public void usernameIsVisible() {
+        Assert.assertTrue("Username ist present on the page", app.getItemListContainerHelper()
+                .userNameIsPresent());
     }
 }

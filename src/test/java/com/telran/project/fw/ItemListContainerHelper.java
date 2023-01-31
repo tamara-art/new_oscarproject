@@ -11,4 +11,7 @@ public class ItemListContainerHelper extends BaseHelper{
     public boolean isContainerPresent() {
         return elementIsPresent(By.id("top_page"));
     }
+    public boolean userNameIsPresent() {
+        return elementIsPresent(By.id("top_page"));
+    }
 }

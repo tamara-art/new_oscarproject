@@ -6,10 +6,10 @@ Feature: Registration functionality
     Given Registration page is opened
     When Registration credentials "<validEmail>" and "<validPassword>" for registration are entered
     And Register button is clicked
-    Then User is registered
-    And User is logged in
+    Then Item list container is present
+    And Username is visible
 
     Examples:
       | validEmail         | validPassword |
-      | oiy58283@xcoxc.com | Awser3567!! |
+      | dhn51171@xcoxc.com | Asdft678!|
 #      | bke34169@xcoxc.com | Zxcf3578!   |

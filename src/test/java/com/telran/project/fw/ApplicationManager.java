@@ -36,7 +36,7 @@ public class ApplicationManager {
     ItemListContainerHelper itemListContainerHelper;
     RegistrationHelper registrationHelper;
 
-    public ApplicationManager(String firefox) {
+    public ApplicationManager() {
         baseUrl = System.getProperty("baseUrl", defaultBaseURL);
         browser = System.getProperty("browser", defaultBrowser);
         initApp();
@@ -152,7 +152,8 @@ public class ApplicationManager {
         return screenshot;
     }
 
-    public void getRegistrationHelper() {
+    public RegistrationHelper getRegistrationHelper() {
+        return registrationHelper;
 
     }
 }

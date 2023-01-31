@@ -16,27 +16,6 @@ public class LoginSteps {
         LoginSteps.app = app;
     }
 
-    @Before
-    public void beforeScenario(){
-        app = new ApplicationManager("firefox");
-        app.initApp();
-        System.out.println("Before is called!");
-    }
-
-    @Before
-    public void beforeStep(){
-        app = new ApplicationManager("firefox");
-        app.initApp();
-        System.out.println("BeforeStep is called!");
-    }
-
-    @After
-    public void afterStep(){
-        app = new ApplicationManager("firefox");
-        app.initApp();
-        System.out.println("AfterStep is called!");
-    }
-
     @After
     public void afterScenario(){
         app.stopApp();
@@ -71,20 +50,9 @@ public class LoginSteps {
         app.getLoginPageHelper().enterEmail(email);
     }
 
-
     @And("password {string} is entered")
     public void passwordIsEntered(String password) {
         app.getLoginPageHelper().enterPassword(password);
     }
 
-    @When("email {string} is entered")
-    public void emailIsEntered(String mail) {
-        app.getLoginPageHelper().enterEmail(mail);
-    }
-
-
-    @And("password {string} is entered")
-    public void passwordIsEntered(String password) {
-        app.getLoginPageHelper().enterPassword();
-    }
 }
