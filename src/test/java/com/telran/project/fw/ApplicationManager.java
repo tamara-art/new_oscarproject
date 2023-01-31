@@ -34,6 +34,7 @@ public class ApplicationManager {
     Recorder recorder;
     LoginPageHelper loginPageHelper;
     ItemListContainerHelper itemListContainerHelper;
+    RegistrationHelper registrationHelper;
 
     public ApplicationManager(String firefox) {
         baseUrl = System.getProperty("baseUrl", defaultBaseURL);
@@ -75,6 +76,7 @@ public class ApplicationManager {
 
         loginPageHelper = new LoginPageHelper(webDriver);
         itemListContainerHelper = new ItemListContainerHelper(webDriver);
+        registrationHelper = new RegistrationHelper(webDriver);
 
         goToMainPage();
     }
@@ -148,5 +150,9 @@ public class ApplicationManager {
             throw new RuntimeException(e);
         }
         return screenshot;
+    }
+
+    public void getRegistrationHelper() {
+
     }
 }
