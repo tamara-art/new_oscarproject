@@ -19,11 +19,11 @@ public class RegistrationSteps {
         app.goToRegistrationAndLoginPage();
     }
 
-    @When("Registration credentials \\({string} and {string}) for registration are entered")
-    public void registrationCredentialsAndForRegistrationAreEntered(String email, String pwd) {
-        app.getRegistrationHelper().enterEmail(email);
-        app.getRegistrationHelper().enterPassword(pwd);
-    }
+//    @When("Registration credentials \\({string} and {string}) for registration are entered")
+//    public void registrationCredentialsAndForRegistrationAreEntered(String email, String pwd) {
+//        app.getRegistrationHelper().enterEmail(email);
+//        app.getRegistrationHelper().enterPassword(pwd);
+//    }
 
     @And("Register button is clicked")
     public void registerButtonIsClicked() {
@@ -42,5 +42,10 @@ public class RegistrationSteps {
     public void usernameIsVisible() {
         Assert.assertTrue("Username ist present on the page", app.getItemListContainerHelper()
                 .userNameIsPresent());
+    }
+
+    @When("Registration credentials {string} and {string} for registration are entered")
+    public void registrationCredentialsAndForRegistrationAreEntered(String arg0, String arg1) {
+
     }
 }

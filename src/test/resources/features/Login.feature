@@ -15,20 +15,20 @@ Feature: Login page functionality
       | dhn51171@xcoxc.com| Asdft678! |
 #      | dhn51171@xcoxc.com| 678Asdft! |
 #
-#  @positive
-#  Scenario Outline: Login with  valid email and password credentials
-#    Given Login page is opened
-#    When email "<valid email>" is entered
-#    And password "<valid password>" is entered
-#    And Login button is clicked
-#    Then error message appears
-#
-#    Examples:
-#      | valid email                                    | valid password |
-#      | very.common@example.com                        | very.common      |
-##      | disposable.style.email.with+symbol@example.com | disposable.style |
-##      | other.email-with-dash@example.com              | other.email      |
-#
+  @positive
+  Scenario Outline: Login with  valid email and password credentials
+    Given Login page is opened
+    When email "<valid email>" is entered
+    And password "<valid password>" is entered
+    And Login button is clicked
+    Then error message appears
+
+    Examples:
+      | valid email                                    | valid password |
+      | very.common@example.com                        | very.common      |
+#      | disposable.style.email.with+symbol@example.com | disposable.style |
+#      | other.email-with-dash@example.com              | other.email      |
+
 #
 #  @negative
 #  Scenario Outline: Login with invalid email and password credentials

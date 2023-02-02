@@ -16,11 +16,11 @@ public class LoginSteps {
         LoginSteps.app = app;
     }
 
-    @After
-    public void afterScenario(){
-        app.stopApp();
-        System.out.println("After is called!");
-    }
+//    @After
+//    public void afterScenario(){
+//        app.stopApp();
+//        System.out.println("After is called!");
+//    }
 
     @Given("Login page is opened")
     public void loginPageIsOpened() {
