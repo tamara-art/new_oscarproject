@@ -25,6 +25,7 @@ public class ApplicationManager {
     private static final String ALL_PRODUCTS_CATALOGUE_PATH = "/catalogue";
 
     private static final String SCREENSHOT_FILE_NAME = "target/screenshots/$timestamp_screenshot.png";
+    public static final String TARGET_SCREENSHOTS = "target/screenshots";
     public static String defaultBaseURL = PropertiesLoader.loadProperty("defaultBaseURL");
     public static String defaultBrowser = PropertiesLoader.loadProperty("defaultBrowser");
     //    protected EventFiringWebDriver webDriver;
@@ -104,7 +105,8 @@ public class ApplicationManager {
     }
 
     public String takeScreenShot() {
-        String pathName = SCREENSHOT_FILE_NAME.replace("$timestamp", "" + System.currentTimeMillis());
+        String pathName = SCREENSHOT_FILE_NAME.replace("$timestamp",
+                "" + System.currentTimeMillis());
         File tmpScreenshotFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
         File screenShotFile = new File(pathName);
         try {
@@ -118,7 +120,8 @@ public class ApplicationManager {
     public void startRecording() throws IOException, AWTException {
         String pathName = "records/recording";
 
-        GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+        GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment()
+                .getDefaultScreenDevice().getDefaultConfiguration();
         recorder = new Recorder(gc, pathName);
         recorder.start();
 
@@ -144,10 +147,11 @@ public class ApplicationManager {
                 .takeScreenshot(webDriver);
 
         try {
-            File f1 = new File("target/screenshots");
+            File f1 = new File(TARGET_SCREENSHOTS);
             boolean bool = f1.mkdir();
             ImageIO.write(screenshot.getImage(), "png",
-                    new File(SCREENSHOT_FILE_NAME.replace("$timestamp", "" + System.currentTimeMillis())));
+                    new File(TARGET_SCREENSHOTS + SCREENSHOT_FILE_NAME.replace("$timestamp",
+                            "" + System.currentTimeMillis())));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

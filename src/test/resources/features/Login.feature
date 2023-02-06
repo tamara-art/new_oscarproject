@@ -1,8 +1,19 @@
 Feature: Login page functionality
 
+  @positive
+  Scenario Outline: Login with  valid email and password credentials
+    Given Login page is opened
+    When email "<valid email>" is entered
+    And password "<valid password>" is entered
+    And Login button is clicked
+    Then main page is opened
+
+    Examples:
+      | valid email        | valid password |
+      | unj83258@nezid.com | Zsxdf3456!      |
+
 
     @negative
-      @currently-working
 #      @wip
   Scenario Outline: Correct error message is when signing in with invalid credentials
     Given Login page is opened
@@ -11,42 +22,12 @@ Feature: Login page functionality
     Then error message appears
 
     Examples:
-      | email         | password |
-      | dhn51171@xcoxc.com| Asdft678! |
-#      | dhn51171@xcoxc.com| 678Asdft! |
-#
-  @positive
-  Scenario Outline: Login with  valid email and password credentials
-    Given Login page is opened
-    When email "<valid email>" is entered
-    And password "<valid password>" is entered
-    And Login button is clicked
-    Then error message appears
+      | email              | password   |
+      | unj83258@nezid.com | 3456Zsxdf! |
+#      | abc-@mail.com      | 3456Zsxdf! |
+#      | abc.def@mail.c      | 3456Zsxdf! |
 
-    Examples:
-      | valid email                                    | valid password |
-      | very.common@example.com                        | very.common      |
-#      | disposable.style.email.with+symbol@example.com | disposable.style |
-#      | other.email-with-dash@example.com              | other.email      |
 
-#
-#  @negative
-#  Scenario Outline: Login with invalid email and password credentials
-#    Given Login page is opened
-#    When email "<invalid Email>" is entered
-#    And password "<invalid Password>" is entered
-#    And Login button is clicked
-#    Then error message appears
-#
-#    Examples:
-#      | invalid Email              | invalid Password |
-#      | just"not"right@example.com | just"not"right   |
-##      | john..doe@example.com      | john..doe        |
-##      | example@localhost          | example          |
-#
-#  @wip
-#  @positive
-#
 
 
 

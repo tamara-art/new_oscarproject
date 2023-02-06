@@ -11,5 +11,4 @@ Feature: Registration functionality
 
     Examples:
       | validEmail         | validPassword |
-      | dhn51171@xcoxc.com | Asdft678!|
-#      | bke34169@xcoxc.com | Zxcf3578!   |
+      | unj83258@nezid.com | Zsxdf3456!|

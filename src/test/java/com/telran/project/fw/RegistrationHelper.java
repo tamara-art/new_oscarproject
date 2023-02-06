@@ -16,9 +16,9 @@ public class RegistrationHelper extends BaseHelper {
         type(By.id("id_registration-password1"), pwd);
     }
 
-//    public void confirmPassword(String pwd) {
-//        type(By.id("id_registration-password2"), pwd);
-//    }
+    public void confirmPassword(String pwd) {
+        type(By.id("id_registration-password2"), pwd);
+    }
 
     public void clickRegisterBtn() {
         click(By.cssSelector("button[name='registration_submit']"));
