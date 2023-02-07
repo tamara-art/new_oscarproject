@@ -10,7 +10,7 @@ Feature: Login page functionality
 
     Examples:
       | valid email        | valid password |
-      | unj83258@nezid.com | Zsxdf3456!      |
+      | qfn16733@omeie.com | AAwser4567!  |
 
 
     @negative
@@ -23,7 +23,7 @@ Feature: Login page functionality
 
     Examples:
       | email              | password   |
-      | unj83258@nezid.com | 3456Zsxdf! |
+      | qfn16733@omeie.com | 4567AAwser!|
 #      | abc-@mail.com      | 3456Zsxdf! |
 #      | abc.def@mail.c      | 3456Zsxdf! |
 

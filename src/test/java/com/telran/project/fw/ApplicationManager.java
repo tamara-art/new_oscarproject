@@ -147,11 +147,14 @@ public class ApplicationManager {
                 .takeScreenshot(webDriver);
 
         try {
-            File f1 = new File(TARGET_SCREENSHOTS);
+//            File f1 = new File(TARGET_SCREENSHOTS);
+            File f1 = new File("target/screenshots");
             boolean bool = f1.mkdir();
             ImageIO.write(screenshot.getImage(), "png",
-                    new File(TARGET_SCREENSHOTS + SCREENSHOT_FILE_NAME.replace("$timestamp",
-                            "" + System.currentTimeMillis())));
+//                    new File(TARGET_SCREENSHOTS + SCREENSHOT_FILE_NAME.replace("$timestamp",
+//                            "" + System.currentTimeMillis())));
+            new File(SCREENSHOT_FILE_NAME.replace("$timestamp",
+                    "" + System.currentTimeMillis())));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

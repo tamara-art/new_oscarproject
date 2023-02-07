@@ -10,5 +10,5 @@ Feature: Registration functionality
     And Username is visible
 
     Examples:
-      | validEmail         | validPassword|
-      | qfn16733@omeie.com | AAwser4567!  |
+      | validEmail                   | validPassword|
+      | txjbuenpogdtzaizhx@tmmwj.net | Zsxdcf567!  |
