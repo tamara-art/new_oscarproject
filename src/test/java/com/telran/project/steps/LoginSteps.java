@@ -27,15 +27,10 @@ public class LoginSteps {
         app.goToRegistrationAndLoginPage();
     }
 
-    @When("email {string} is entered")
-    public void emailIsEntered(String email) {
+    @When("login credentials \\({string} and {string}) are entered")
+    public void loginCredentialsAndAreEntered(String email, String pwd) {
         app.getLoginPageHelper().enterEmail(email);
-    }
-
-    @And("password {string} is entered")
-    public void passwordIsEntered(String password) {
-        app.getLoginPageHelper().enterPassword(password);
-
+        app.getLoginPageHelper().enterPassword(pwd);
     }
 
     @And("Login button is clicked")
@@ -54,9 +49,4 @@ public class LoginSteps {
         Assert.assertTrue("Error message appears", app.getLoginPageHelper().hasErrorMsg());
     }
 
-    @When("login credentials \\({string} and {string}) are entered")
-    public void loginCredentialsAndAreEntered(String email, String pwd) {
-        app.getLoginPageHelper().enterEmail(email);
-        app.getLoginPageHelper().enterPassword(pwd);
-    }
 }

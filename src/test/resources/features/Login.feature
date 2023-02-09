@@ -3,8 +3,7 @@ Feature: Login page functionality
   @positive
   Scenario Outline: Login with  valid email and password credentials
     Given Login page is opened
-    When email "<valid email>" is entered
-    And password "<valid password>" is entered
+    When login credentials ("<valid email>" and "<valid password>") are entered
     And Login button is clicked
     Then main page is opened
 
@@ -15,7 +14,7 @@ Feature: Login page functionality
 
     @negative
 #      @wip
-  Scenario Outline: Correct error message is when signing in with invalid credentials
+  Scenario Outline: Correct error message appears when signing in with invalid credentials
     Given Login page is opened
     When login credentials ("<email>" and "<password>") are entered
     And Login button is clicked
@@ -24,8 +23,7 @@ Feature: Login page functionality
     Examples:
       | email              | password   |
       | qfn16733@omeie.com | 4567AAwser!|
-#      | abc-@mail.com      | 3456Zsxdf! |
-#      | abc.def@mail.c      | 3456Zsxdf! |
+
 
 
 

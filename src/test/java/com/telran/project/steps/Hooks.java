@@ -2,6 +2,7 @@ package com.telran.project.steps;
 
 import com.telran.project.fw.ApplicationManager;
 import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
 
 public class Hooks {
     protected static ApplicationManager app;
@@ -23,8 +24,9 @@ public class Hooks {
         System.out.println("After is called!");
     }
 
-//    @After("@browser and not @headless")
-//    public void doSomethingAfter(Scenario scenario){
-//        scenario.isFailed();
-//    }
+    @After("@requiresUserDeletion")
+    public void removeUser(Scenario scenario){
+//        app.getRegistrationHelper()
+        app.getUserContext().getEmail();//возвращает имеил юзера, созданного в предыдущем степе
+    }
 }

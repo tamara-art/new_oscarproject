@@ -24,6 +24,7 @@ public class RegistrationSteps {
         app.getRegistrationHelper().enterEmail(email);
         app.getRegistrationHelper().enterPassword(pwd);
         app.getRegistrationHelper().confirmPassword(pwd);
+        app.saveUserContext(email, pwd);
     }
 
     @And("Register button is clicked")

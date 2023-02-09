@@ -2,6 +2,7 @@ package com.telran.project.fw;
 
 import com.google.common.io.Files;
 import com.telran.project.utils.PropertiesLoader;
+import com.telran.project.utils.User;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -24,7 +25,7 @@ public class ApplicationManager {
     public static final String LOGIN_PAGE_PATH = "/accounts/login";
     private static final String ALL_PRODUCTS_CATALOGUE_PATH = "/catalogue";
 
-    private static final String SCREENSHOT_FILE_NAME = "target/screenshots/$timestamp_screenshot.png";
+    private static final String SCREENSHOT_FILE_NAME = "/$timestamp_screenshot.png";
     public static final String TARGET_SCREENSHOTS = "target/screenshots";
     public static String defaultBaseURL = PropertiesLoader.loadProperty("defaultBaseURL");
     public static String defaultBrowser = PropertiesLoader.loadProperty("defaultBrowser");
@@ -36,6 +37,7 @@ public class ApplicationManager {
     LoginPageHelper loginPageHelper;
     ItemListContainerHelper itemListContainerHelper;
     RegistrationHelper registrationHelper;
+    User currentScenarioUser;
 
     public ApplicationManager() {
         baseUrl = System.getProperty("baseUrl", defaultBaseURL);
@@ -49,6 +51,14 @@ public class ApplicationManager {
 
     public ItemListContainerHelper getItemListContainerHelper() {
         return itemListContainerHelper;
+    }
+
+    public void saveUserContext(String email, String pwd) {
+        currentScenarioUser = new User(email, pwd);
+    }
+
+    public User getUserContext(){
+        return currentScenarioUser;
     }
 
     public void initApp() {
@@ -104,18 +114,18 @@ public class ApplicationManager {
         webDriver.get(baseUrl + ALL_PRODUCTS_CATALOGUE_PATH);
     }
 
-    public String takeScreenShot() {
-        String pathName = SCREENSHOT_FILE_NAME.replace("$timestamp",
-                "" + System.currentTimeMillis());
-        File tmpScreenshotFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
-        File screenShotFile = new File(pathName);
-        try {
-            Files.copy(tmpScreenshotFile, screenShotFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return pathName;
-    }
+//    public String takeScreenShot() {
+//        String pathName = SCREENSHOT_FILE_NAME.replace("$timestamp",
+//                "" + System.currentTimeMillis());
+//        File tmpScreenshotFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
+//        File screenShotFile = new File(pathName);
+//        try {
+//            Files.copy(tmpScreenshotFile, screenShotFile);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return pathName;
+//    }
 
     public void startRecording() throws IOException, AWTException {
         String pathName = "records/recording";
@@ -147,14 +157,13 @@ public class ApplicationManager {
                 .takeScreenshot(webDriver);
 
         try {
-//            File f1 = new File(TARGET_SCREENSHOTS);
-            File f1 = new File("target/screenshots");
+            File f1 = new File(TARGET_SCREENSHOTS);
+//            File f1 = new File("target/screenshots");
             boolean bool = f1.mkdir();
+            System.out.println("My String" + TARGET_SCREENSHOTS + SCREENSHOT_FILE_NAME);
             ImageIO.write(screenshot.getImage(), "png",
-//                    new File(TARGET_SCREENSHOTS + SCREENSHOT_FILE_NAME.replace("$timestamp",
-//                            "" + System.currentTimeMillis())));
-            new File(SCREENSHOT_FILE_NAME.replace("$timestamp",
-                    "" + System.currentTimeMillis())));
+                    new File(TARGET_SCREENSHOTS + SCREENSHOT_FILE_NAME.replace("$timestamp",
+                            "" + System.currentTimeMillis())));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
