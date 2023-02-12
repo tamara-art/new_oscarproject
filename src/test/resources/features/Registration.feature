@@ -1,8 +1,8 @@
 Feature: Registration functionality
 
 
+  @requiresUserDeletion
   @positive
-    @requiresUserDeletion
   Scenario Outline: Registration with valid credentials
     Given Registration page is opened
     When Registration credentials "<validEmail>" and "<validPassword>" for registration are entered

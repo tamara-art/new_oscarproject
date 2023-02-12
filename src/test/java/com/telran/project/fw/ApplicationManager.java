@@ -24,9 +24,11 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
     public static final String LOGIN_PAGE_PATH = "/accounts/login";
     private static final String ALL_PRODUCTS_CATALOGUE_PATH = "/catalogue";
-
+    private static final String PROFILE_PATH = "/accounts/profile";
     private static final String SCREENSHOT_FILE_NAME = "/$timestamp_screenshot.png";
     public static final String TARGET_SCREENSHOTS = "target/screenshots";
+    private static final String DELETE_PROFILE_PATH = "/accounts/profile/delete";
+
     public static String defaultBaseURL = PropertiesLoader.loadProperty("defaultBaseURL");
     public static String defaultBrowser = PropertiesLoader.loadProperty("defaultBrowser");
     //    protected EventFiringWebDriver webDriver;
@@ -38,6 +40,7 @@ public class ApplicationManager {
     ItemListContainerHelper itemListContainerHelper;
     RegistrationHelper registrationHelper;
     User currentScenarioUser;
+    AccountHelper accountHelper;
 
     public ApplicationManager() {
         baseUrl = System.getProperty("baseUrl", defaultBaseURL);
@@ -114,6 +117,14 @@ public class ApplicationManager {
         webDriver.get(baseUrl + ALL_PRODUCTS_CATALOGUE_PATH);
     }
 
+    public void goToProfilePage(){
+        webDriver.get(baseUrl + PROFILE_PATH);
+    }
+
+    public void goToDeleteProfilePage(){
+        webDriver.get(baseUrl + DELETE_PROFILE_PATH);
+    }
+
 //    public String takeScreenShot() {
 //        String pathName = SCREENSHOT_FILE_NAME.replace("$timestamp",
 //                "" + System.currentTimeMillis());
@@ -174,4 +185,9 @@ public class ApplicationManager {
         return registrationHelper;
 
     }
+
+    public AccountHelper getAccountHelper() {
+        return accountHelper;
+    }
+
 }

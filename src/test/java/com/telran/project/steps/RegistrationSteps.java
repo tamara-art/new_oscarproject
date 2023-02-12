@@ -50,4 +50,6 @@ public class RegistrationSteps {
     public void correctErrorMessageAppears() {
         Assert.assertTrue("Correct error message appears", app.getRegistrationHelper().hasErrorMsg());
     }
+
+
 }

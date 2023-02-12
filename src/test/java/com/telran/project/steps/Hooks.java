@@ -24,9 +24,9 @@ public class Hooks {
         System.out.println("After is called!");
     }
 
-//    @After("@requiresUserDeletion")
-//    public void removeUser(Scenario scenario){
-////        app.getRegistrationHelper()
-//        app.getUserContext().getEmail();//возвращает имеил юзера, созданного в предыдущем степе
-//    }
+    @After("@requiresUserDeletion")
+    public void removeUser(Scenario scenario){
+//        app.getRegistrationHelper()
+        app.getUserContext().getEmail();//возвращает имеил юзера, созданного в предыдущем степе
+    }
 }
