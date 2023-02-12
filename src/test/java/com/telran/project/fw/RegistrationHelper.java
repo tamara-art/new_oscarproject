@@ -23,4 +23,8 @@ public class RegistrationHelper extends BaseHelper {
     public void clickRegisterBtn() {
         click(By.cssSelector("button[name='registration_submit']"));
     }
+
+    public boolean hasErrorMsg() {
+        return elementIsPresent(By.cssSelector("#register_form > div:nth-child(4) > div > span"));
+    }
 }
