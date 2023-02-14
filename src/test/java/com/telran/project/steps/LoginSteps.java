@@ -28,7 +28,7 @@ public class LoginSteps {
     }
 
     @When("login credentials \\({string} and {string}) are entered")
-    public void loginCredentialsAndAreEntered(String email, String pwd) {
+    public void loginCredentialsAreEntered(String email, String pwd) {
         app.getLoginPageHelper().enterEmail(email);
         app.getLoginPageHelper().enterPassword(pwd);
     }
@@ -49,4 +49,8 @@ public class LoginSteps {
         Assert.assertTrue("Error message appears", app.getLoginPageHelper().hasErrorMsg());
     }
 
+    @When("default login credentials are entered")
+    public void defaultLoginCredentialsAreEntered() {
+        loginCredentialsAreEntered(app.getUserContext().getEmail(), app.getUserContext().getPwd());
+    }
 }

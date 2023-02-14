@@ -2,6 +2,7 @@ package com.telran.project.steps;
 
 import com.telran.project.fw.ApplicationManager;
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
 public class Hooks {
@@ -28,5 +29,16 @@ public class Hooks {
     public void removeUser(Scenario scenario){
 //        app.getRegistrationHelper()
         app.getUserContext().getEmail();//возвращает имеил юзера, созданного в предыдущем степе
+    }
+
+    @Before("@requiresUserRegistration")
+    public void registerUser(Scenario scenario){
+        String currentEmail = app.getUserContext().getEmail();
+        String currentPassword = app.getUserContext().getPwd();
+        app.goToRegistrationAndLoginPage();
+        app.getRegistrationHelper().enterEmail(currentEmail);
+        app.getRegistrationHelper().enterPassword(currentPassword);
+        app.getRegistrationHelper().confirmPassword(currentPassword);
+        app.getRegistrationHelper().clickRegisterBtn();
     }
 }

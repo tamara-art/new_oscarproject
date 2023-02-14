@@ -6,7 +6,7 @@ public class User {
 
 
     public String getEmail() {
-        return "qfn16733@omeie.com";
+        return email;
     }
 
     public String getPwd() {

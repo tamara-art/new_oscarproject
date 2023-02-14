@@ -31,6 +31,8 @@ public class ApplicationManager {
 
     public static String defaultBaseURL = PropertiesLoader.loadProperty("defaultBaseURL");
     public static String defaultBrowser = PropertiesLoader.loadProperty("defaultBrowser");
+    public static String defaultRegistrationEmail = PropertiesLoader.loadProperty("defaultRegistrationEmail");
+    public static String defaultRegistrationPassword = PropertiesLoader.loadProperty("defaultRegistrationPassword");
     //    protected EventFiringWebDriver webDriver;
     protected WebDriver webDriver;
     protected String browser;
@@ -91,7 +93,7 @@ public class ApplicationManager {
         loginPageHelper = new LoginPageHelper(webDriver);
         itemListContainerHelper = new ItemListContainerHelper(webDriver);
         registrationHelper = new RegistrationHelper(webDriver);
-
+        currentScenarioUser = new User(defaultRegistrationEmail, defaultRegistrationPassword);
         goToMainPage();
     }
 
