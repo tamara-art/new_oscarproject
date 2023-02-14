@@ -52,9 +52,9 @@ public class AccountSteps {
         app.goToAllProductsPage();
     }
 
-    @And("Allerinner message appears")
-    public void allerinnerMessageAppears() {
-        Assert.assertTrue("Allertinner message appears",
+    @And("{string} message appears")
+    public void yourProfileHasNowBeenDeletedThanksForUsingTheSiteMessageAppears() {
+        Assert.assertTrue("Your profile has now been deleted. Thanks for using the site message appears",
                 app.getAccountHelper().hasAllerInnerMsg());
     }
 }

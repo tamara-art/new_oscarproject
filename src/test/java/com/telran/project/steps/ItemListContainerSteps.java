@@ -12,10 +12,10 @@ public class ItemListContainerSteps {
         ItemListContainerSteps.app = app;
     }
 
-    @When("All products page is opened")
-    public void allProductsPageIsOpened() {
-        app.goToAllProductsPage();
-    }
+//    @When("All products page is opened")
+//    public void allProductsPageIsOpened() {
+//        app.goToAllProductsPage();
+//    }
 
     @Then("All products page is loaded")
     public void allProductsPageIsLoaded() {

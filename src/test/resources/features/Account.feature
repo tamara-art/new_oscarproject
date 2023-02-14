@@ -14,5 +14,5 @@ Scenario: Account contains correct profile data
   Then Warning message appears
   Then Button danger is clicked
   And Profile is deleted
-#  And 'Your profile has now been deleted. Thanks for using the site' message appears
+  And 'Your profile has now been deleted. Thanks for using the site' message appears
 
