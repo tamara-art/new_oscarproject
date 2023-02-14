@@ -16,37 +16,41 @@ public class LoginSteps {
         LoginSteps.app = app;
     }
 
+//    @After
+//    public void afterScenario(){
+//        app.stopApp();
+//        System.out.println("After is called!");
+//    }
+
     @Given("Login page is opened")
     public void loginPageIsOpened() {
         app.goToRegistrationAndLoginPage();
     }
 
+    @When("login credentials \\({string} and {string}) are entered")
+    public void loginCredentialsAreEntered(String email, String pwd) {
+        app.getLoginPageHelper().enterEmail(email);
+        app.getLoginPageHelper().enterPassword(pwd);
+    }
 
     @And("Login button is clicked")
     public void loginButtonIsClicked() {
         app.getLoginPageHelper().clickLoginBtn();
     }
 
-    //    https://cucumber.io/docs/cucumber/cucumber-expressions/
-    @When("login credentials \\({string} and {string}) are entered")
-    public void loginCredentialsAndAreEntered(String email, String pwd) {
-        app.getLoginPageHelper().enterEmail(email);
-        app.getLoginPageHelper().enterPassword(pwd);
+    @Then("main page is opened")
+    public void mainPageIsOpened() {
+        app.goToMainPage();
     }
+
 
     @Then("error message appears")
     public void errorMessageAppears() {
-        Assert.assertTrue("Error messages appear", app.getLoginPageHelper().hasErrorMsg());
+        Assert.assertTrue("Error message appears", app.getLoginPageHelper().hasErrorMsg());
     }
 
-    @When("email {string} is entered")
-    public void emailIsEntered(String email) {
-        app.getLoginPageHelper().enterEmail(email);
+    @When("default login credentials are entered")
+    public void defaultLoginCredentialsAreEntered() {
+        loginCredentialsAreEntered(app.getUserContext().getEmail(), app.getUserContext().getPwd());
     }
-
-    @And("password {string} is entered")
-    public void passwordIsEntered(String password) {
-        app.getLoginPageHelper().enterPassword(password);
-    }
-
 }

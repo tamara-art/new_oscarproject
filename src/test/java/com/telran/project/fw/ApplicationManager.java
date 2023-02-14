@@ -2,6 +2,7 @@ package com.telran.project.fw;
 
 import com.google.common.io.Files;
 import com.telran.project.utils.PropertiesLoader;
+import com.telran.project.utils.User;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -23,10 +24,15 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
     public static final String LOGIN_PAGE_PATH = "/accounts/login";
     private static final String ALL_PRODUCTS_CATALOGUE_PATH = "/catalogue";
+    private static final String PROFILE_PATH = "/accounts/profile";
+    private static final String SCREENSHOT_FILE_NAME = "/$timestamp_screenshot.png";
+    public static final String TARGET_SCREENSHOTS = "target/screenshots";
+    private static final String DELETE_PROFILE_PATH = "/accounts/profile/delete";
 
-    private static final String SCREENSHOT_FILE_NAME = "target/screenshots/$timestamp_screenshot.png";
     public static String defaultBaseURL = PropertiesLoader.loadProperty("defaultBaseURL");
     public static String defaultBrowser = PropertiesLoader.loadProperty("defaultBrowser");
+    public static String defaultRegistrationEmail = PropertiesLoader.loadProperty("defaultRegistrationEmail");
+    public static String defaultRegistrationPassword = PropertiesLoader.loadProperty("defaultRegistrationPassword");
     //    protected EventFiringWebDriver webDriver;
     protected WebDriver webDriver;
     protected String browser;
@@ -34,8 +40,11 @@ public class ApplicationManager {
     Recorder recorder;
     LoginPageHelper loginPageHelper;
     ItemListContainerHelper itemListContainerHelper;
+    RegistrationHelper registrationHelper;
+    User currentScenarioUser;
+    AccountHelper accountHelper;
 
-    public ApplicationManager(String firefox) {
+    public ApplicationManager() {
         baseUrl = System.getProperty("baseUrl", defaultBaseURL);
         browser = System.getProperty("browser", defaultBrowser);
         initApp();
@@ -47,6 +56,14 @@ public class ApplicationManager {
 
     public ItemListContainerHelper getItemListContainerHelper() {
         return itemListContainerHelper;
+    }
+
+    public void saveUserContext(String email, String pwd) {
+        currentScenarioUser = new User(email, pwd);
+    }
+
+    public User getUserContext(){
+        return currentScenarioUser;
     }
 
     public void initApp() {
@@ -75,7 +92,8 @@ public class ApplicationManager {
 
         loginPageHelper = new LoginPageHelper(webDriver);
         itemListContainerHelper = new ItemListContainerHelper(webDriver);
-
+        registrationHelper = new RegistrationHelper(webDriver);
+        currentScenarioUser = new User(defaultRegistrationEmail, defaultRegistrationPassword);
         goToMainPage();
     }
 
@@ -101,22 +119,32 @@ public class ApplicationManager {
         webDriver.get(baseUrl + ALL_PRODUCTS_CATALOGUE_PATH);
     }
 
-    public String takeScreenShot() {
-        String pathName = SCREENSHOT_FILE_NAME.replace("$timestamp", "" + System.currentTimeMillis());
-        File tmpScreenshotFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
-        File screenShotFile = new File(pathName);
-        try {
-            Files.copy(tmpScreenshotFile, screenShotFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return pathName;
+    public void goToProfilePage(){
+        webDriver.get(baseUrl + PROFILE_PATH);
     }
+
+    public void goToDeleteProfilePage(){
+        webDriver.get(baseUrl + DELETE_PROFILE_PATH);
+    }
+
+//    public String takeScreenShot() {
+//        String pathName = SCREENSHOT_FILE_NAME.replace("$timestamp",
+//                "" + System.currentTimeMillis());
+//        File tmpScreenshotFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
+//        File screenShotFile = new File(pathName);
+//        try {
+//            Files.copy(tmpScreenshotFile, screenShotFile);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return pathName;
+//    }
 
     public void startRecording() throws IOException, AWTException {
         String pathName = "records/recording";
 
-        GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+        GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment()
+                .getDefaultScreenDevice().getDefaultConfiguration();
         recorder = new Recorder(gc, pathName);
         recorder.start();
 
@@ -142,11 +170,26 @@ public class ApplicationManager {
                 .takeScreenshot(webDriver);
 
         try {
+            File f1 = new File(TARGET_SCREENSHOTS);
+//            File f1 = new File("target/screenshots");
+            boolean bool = f1.mkdir();
+            System.out.println("My String" + TARGET_SCREENSHOTS + SCREENSHOT_FILE_NAME);
             ImageIO.write(screenshot.getImage(), "png",
-                    new File(SCREENSHOT_FILE_NAME.replace("$timestamp", "" + System.currentTimeMillis())));
+                    new File(TARGET_SCREENSHOTS + SCREENSHOT_FILE_NAME.replace("$timestamp",
+                            "" + System.currentTimeMillis())));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return screenshot;
     }
+
+    public RegistrationHelper getRegistrationHelper() {
+        return registrationHelper;
+
+    }
+
+    public AccountHelper getAccountHelper() {
+        return accountHelper;
+    }
+
 }
