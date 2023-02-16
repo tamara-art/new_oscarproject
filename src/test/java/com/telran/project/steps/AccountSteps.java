@@ -33,8 +33,8 @@ public class AccountSteps {
     }
 
     @Then("Enter confirmation password")
-    public void enterConfirmationPassword(String pwd) {
-        app.getAccountHelper().confirmPasswordToDeleteProfile(pwd);
+    public void enterConfirmationPassword() {
+        app.getAccountHelper().confirmPasswordToDeleteProfile(app.getUserContext().getPwd());
     }
 
     @Then("Warning message appears")
@@ -53,9 +53,9 @@ public class AccountSteps {
     }
 
     @And("{string} message appears")
-    public void yourProfileHasNowBeenDeletedThanksForUsingTheSiteMessageAppears() {
-        Assert.assertTrue("Your profile has now been deleted. Thanks for using the site message appears",
-                app.getAccountHelper().hasAllerInnerMsg());
+    public void yourProfileHasNowBeenDeletedThanksForUsingTheSiteMessageAppears(String errorMessage) {
+        Assert.assertEquals("Your profile has now been deleted. Thanks for using the site message appears",
+                errorMessage, app.getAccountHelper().getErrorMessage());
     }
 }
 

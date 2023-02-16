@@ -102,4 +102,9 @@ public class BaseHelper {
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(timeOutInSeconds));
         wait.until(ExpectedConditions.alertIsPresent());
     }
+
+    protected String getText(By locator) {
+        return
+        webDriver.findElement(locator).getText();
+    }
 }

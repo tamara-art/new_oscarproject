@@ -94,6 +94,7 @@ public class ApplicationManager {
         itemListContainerHelper = new ItemListContainerHelper(webDriver);
         registrationHelper = new RegistrationHelper(webDriver);
         currentScenarioUser = new User(defaultRegistrationEmail, defaultRegistrationPassword);
+        accountHelper = new AccountHelper(webDriver);
         goToMainPage();
     }
 

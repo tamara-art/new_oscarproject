@@ -9,7 +9,7 @@ public class AccountHelper extends BaseHelper {
     }
 
     public void clickDeleteBtn() {
-        click(By.cssSelector("#delete_profile"));
+        click(By.id("delete_profile"));
     }
 
     public void confirmPasswordToDeleteProfile(String pwd) {
@@ -24,7 +24,8 @@ public class AccountHelper extends BaseHelper {
         click(By.cssSelector("#delete_profile_form > div:nth-child(4) > button"));
     }
 
-    public boolean hasAllerInnerMsg() {
-        return elementIsPresent(By.cssSelector("#messages > div > div"));
+    public String getErrorMessage() {
+        return getText(By.xpath("//*[@id=\"messages\"]/div/div"));
     }
+
 }
